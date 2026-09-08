@@ -1,0 +1,38 @@
+# Compiled class files
+target/
+!/.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Application properties with secrets (optional - if you want to exclude completely)
+# backend/src/main/resources/application.properties
+
+# If you want to keep application.properties but exclude sensitive lines,
+# better approach: create application.properties.example and keep real one local only
+backend/src/main/resources/application.properties
+
+# Build artifacts
+*.jar
+*.war
+*.ear
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Environment variables
+.env
