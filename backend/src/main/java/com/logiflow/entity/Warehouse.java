@@ -1,21 +1,24 @@
 package com.logiflow.entity;
 
-import com.logiflow.entity.enums.WarehouseStatus;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import com.logiflow.entity.enums.WarehouseStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "warehouses")
 public class Warehouse extends BaseEntity {
+
+    @Column(nullable = false, unique = true, length = 30)
+    private String warehouseCode;
 
     @Column(nullable = false, unique = true, length = 150)
     private String name;
@@ -25,6 +28,12 @@ public class Warehouse extends BaseEntity {
 
     @Column(nullable = false, length = 500)
     private String address;
+
+    @Column(nullable = false, length = 100)
+    private String city;
+
+    @Column(nullable = false, length = 100)
+    private String state;
 
     @Column(nullable = false, length = 20)
     private String contactNumber;
@@ -38,6 +47,20 @@ public class Warehouse extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private WarehouseStatus status = WarehouseStatus.ACTIVE;
+
+    @Column(nullable = false)
+    private Boolean active = true;
+
+    @OneToMany(mappedBy = "warehouse", fetch = FetchType.LAZY)
+    private List<Inventory> inventory = new ArrayList<>();
+
+    public String getWarehouseCode() {
+        return warehouseCode;
+    }
+
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
+    }
 
     public String getName() {
         return name;
@@ -61,6 +84,22 @@ public class Warehouse extends BaseEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getContactNumber() {
@@ -95,8 +134,13 @@ public class Warehouse extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "warehouse", fetch = FetchType.LAZY)
-    private List<Inventory> inventory = new ArrayList<>();
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public List<Inventory> getInventory() {
         return inventory;

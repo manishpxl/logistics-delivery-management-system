@@ -11,7 +11,9 @@ import com.logiflow.entity.Warehouse;
 @Repository
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
-    Optional<Warehouse> findByCode(String code);
+    Optional<Warehouse> findByWarehouseCode(String warehouseCode);
+
+    boolean existsByWarehouseCode(String warehouseCode);
 
     List<Warehouse> findByActive(Boolean active);
 
